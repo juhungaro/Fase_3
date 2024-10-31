@@ -1,0 +1,9 @@
+services:
+  oracle-db: # Padrão de nome de usuário: system
+    container_name: oracle-server-db
+    image: gvenzl/oracle-xe
+    environment:
+    - ORACLE_PASSWORD=oracle123
+    - ORACLE_CHARACTERSET=AL32UTF8 # Corresponde ao UTF-8 no Oracle
+    ports:
+      - "1521:1521" # Porta padrão do Oracle para conexões
