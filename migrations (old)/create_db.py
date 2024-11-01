@@ -1,5 +1,5 @@
 import oracledb
-from db_config import DBConfig
+from app.db_config import DBConfig
 
 # Definindo a conexão com o banco de dados
 dsn = oracledb.makedsn("localhost", 1521, sid="XE")
