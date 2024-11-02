@@ -1,11 +1,10 @@
 #include "DHTesp.h"
 
-const int PIN_DO_SENSOR_UMIDADE = 15;
-const int PIN_DO_RELE = 22;
-const int pinoBotaoPotassio = 23;
-const int pinoBotaoFosforo = 18;
-//const int pinoBomba = 21;
-const int pinoLed = 21; 
+const int pinSensorUmidade = 15;
+const int pinRele = 22;
+const int pinBotaoPotassio = 23;
+const int pinBotaoFosforo = 18;
+const int pinLed = 21; 
 
 DHTesp sensorUmidade;
 
@@ -17,11 +16,11 @@ int gerarNumeroAleatorio(int min, int max) {
 
 void setup() {
   Serial.begin(115200);
-  sensorUmidade.setup(PIN_DO_SENSOR_UMIDADE, DHTesp::DHT22);
-  pinMode(PIN_DO_RELE, OUTPUT);
-  pinMode(pinoBotaoPotassio, OUTPUT);
-  pinMode(pinoBotaoFosforo, OUTPUT);
-  pinMode(pinoLed, OUTPUT); 
+  sensorUmidade.setup(pinSensorUmidade, DHTesp::DHT22);
+  pinMode(pinRele, OUTPUT);
+  pinMode(pinBotaoPotassio, OUTPUT);
+  pinMode(pinBotaoFosforo, OUTPUT);
+  pinMode(pinLed, OUTPUT); 
 }
 
 void loop() {
@@ -39,12 +38,12 @@ void loop() {
   // Verifica as condições e aciona os dispositivos
   // Bomba: Acionada apenas se a umidade estiver abaixo de 20%
   if (dados.humidity < 20) {
-    digitalWrite(PIN_DO_RELE, HIGH); // Liga a bomba
-    digitalWrite(pinoLed, HIGH);   // Liga o LED
+    digitalWrite(pinRele, HIGH); // Liga a bomba
+    digitalWrite(pinLed, HIGH);   // Liga o LED
     Serial.println("Bomba ativada: Umidade baixa detectada");
   } else {
-    digitalWrite(PIN_DO_RELE, LOW);  // Desliga a bomba
-    digitalWrite(pinoLed, LOW);    // Desliga o LED
+    digitalWrite(pinRele, LOW);  // Desliga a bomba
+    digitalWrite(pinLed, LOW);    // Desliga o LED
     Serial.println("Bomba desligada: Umidade suficiente");
   }
 
@@ -53,20 +52,20 @@ void loop() {
   // Botões: Acionados de acordo com os níveis de fósforo e potássio  
 
   if (valorPotassio < 38) {
-    digitalWrite(pinoBotaoPotassio, HIGH); // Liga o botão de potássio
+    digitalWrite(pinBotaoPotassio, HIGH); // Liga o botão de potássio
     Serial.println("Ativação de potássio");
   } else {
-    digitalWrite(pinoBotaoPotassio, LOW); // Desliga o botão de potássio
+    digitalWrite(pinBotaoPotassio, LOW); // Desliga o botão de potássio
     Serial.println("Nível de potássio suficiente");
   }
 
   if (valorFosforo < 15) {
-    digitalWrite(pinoBotaoFosforo, HIGH); // Liga o botão de fósforo
+    digitalWrite(pinBotaoFosforo, HIGH); // Liga o botão de fósforo
      Serial.println("Ativação de fósforo");
   } else {
-    digitalWrite(pinoBotaoFosforo, LOW); // Desliga o botão de fósforo
+    digitalWrite(pinBotaoFosforo, LOW); // Desliga o botão de fósforo
     Serial.println("Nível de fósforo suficiente");
   }
 
-  delay(5000);
+  delay(1000);
 }
