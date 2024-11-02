@@ -17,7 +17,7 @@ class SensorRequest(BaseModel):
 
 # Cria nova medição de sensor
 @router.post("/", summary='Cria nova medição de nutrientes, ph, temperatura e umidade')
-def create_sensor_nutriente(sensor: SensorRequest = Body(...), db: Session = Depends(get_db)):
+def create_sensor(sensor: SensorRequest = Body(...), db: Session = Depends(get_db)):
     cultura = db.query(Cultura).filter(Cultura.idcultura == sensor.idcultura).first()
     if cultura is None:
         raise HTTPException(status_code=404, detail="Cultura não encontrada")
@@ -38,5 +38,5 @@ def create_sensor_nutriente(sensor: SensorRequest = Body(...), db: Session = Dep
 
 # Lista medições de sensores
 @router.get("/", summary='Lista todas as medições')
-def list_sensor_nutrientes(db: Session = Depends(get_db)):
+def list_sensor(db: Session = Depends(get_db)):
     return db.query(Sensor).all()
