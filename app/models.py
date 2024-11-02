@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from db_config import Base
 
 # Tabela Culturas
-cultura_seq = Sequence("cultura_id_seq", start=1, increment=1)
+cultura_seq = Sequence("cultura_id_seq", start=1, increment=1) # Oracle precisa dessa classe para a incrementação da primary key funcionar corretamente
 class Cultura(Base):
     __tablename__ = "culturas"
 
@@ -13,52 +13,23 @@ class Cultura(Base):
                        server_default=cultura_seq.next_value())
     nome = Column(String(30), unique=True, nullable=False)
 
-    sensores_nutrientes = relationship("SensorNutrientes", back_populates="cultura")
-    sensores_ph = relationship("SensorPH", back_populates="cultura")
-    sensores_umidades = relationship("SensorUmidades", back_populates="cultura")
+    sensores = relationship("Sensor", back_populates="cultura")
 
-# Tabela SensorNutrientes
-nutrientes_seq = Sequence("nutrientes_id_seq", start=1, increment=1)
-class SensorNutrientes(Base):
-    __tablename__ = "sensor_nutrientes"
+# Tabela Sensores
+sensor_seq = Sequence("sensor_id_seq", start=1, increment=1)
+class Sensor(Base):
+    __tablename__ = "sensores"
 
-    idsensornutriente = Column(Integer,
-                       nutrientes_seq, 
+    idsensor = Column(Integer,
+                       sensor_seq, 
                        primary_key=True,
-                       server_default=nutrientes_seq.next_value())
+                       server_default=sensor_seq.next_value())
     valorfosforo = Column(Float, nullable=False)
     valorpotassio = Column(Float, nullable=False)
+    valorph = Column(Float, nullable=False)
+    valorumidade = Column(Float, nullable=False)
+    valortemperatura = Column(Float, nullable=False)
     datamedicao = Column(DateTime, nullable=False)
     idcultura = Column(Integer, ForeignKey("culturas.idcultura"))
 
-    cultura = relationship("Cultura", back_populates="sensores_nutrientes")
-
-# Tabela SensorPh
-ph_seq = Sequence("ph_id_seq", start=1, increment=1)
-class SensorPH(Base):
-    __tablename__ = "sensor_phs"
-
-    idsensorph = Column(Integer,
-                       ph_seq, 
-                       primary_key=True,
-                       server_default=ph_seq.next_value())
-    valor = Column(Float, nullable=False)
-    datamedicao = Column(DateTime, nullable=False)
-    idcultura = Column(Integer, ForeignKey("culturas.idcultura"))
-
-    cultura = relationship("Cultura", back_populates="sensores_ph")
-
-# Tabela SensorUmidades
-umidade_seq = Sequence("umidade_id_seq", start=1, increment=1)
-class SensorUmidades(Base):
-    __tablename__ = "sensor_umidades"
-
-    idsensorumidade = Column(Integer,
-                       umidade_seq, 
-                       primary_key=True,
-                       server_default=umidade_seq.next_value())
-    valor = Column(Float, nullable=False)
-    datamedicao = Column(DateTime, nullable=False)
-    idcultura = Column(Integer, ForeignKey("culturas.idcultura"))
-
-    cultura = relationship("Cultura", back_populates="sensores_umidades")
+    cultura = relationship("Cultura", back_populates="sensores")
