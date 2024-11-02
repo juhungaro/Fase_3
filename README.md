@@ -1,4 +1,21 @@
-# Fase 3
+# Sistema de irrigação automatico 
+
+**Descrição Geral
+Este sistema de irrigação automatizado tem como objetivo otimizar a gestão da água e nutrientes em plantações, garantindo um crescimento saudável e eficiente das culturas. Ele monitora a umidade do solo e os níveis de potássio e fósforo, acionando a bomba de água quando necessário e liberando os nutrientes adequados.
+
+**Componentes:
+Microcontrolador: ESP32
+Sensor de Umidade e temperatura do solo: dht22
+Sensores de Potássio e Fósforo: botão liga desliga de acordo com os numeros gerados aleatoriamente
+Relé: Para controlar a bomba de água
+Bomba de Água: representada por led azul
+
+**Funcionamento:
+Leitura dos Sensores: O microcontrolador lê continuamente (delay 1000) os dados dos sensores de umidade, temperatura, potássio e fósforo.
+Verificação das Condições: Os valores obtidos são comparados com os limites pré-definidos.
+Acionamento da Bomba: Se a umidade do solo estiver abaixo do limite mínimo de 20% de umidade, o microcontrolador aciona a bomba de água através do relé.
+Liberação de Nutrientes: Se os níveis de potássio (<38) ou fósforo (<15) estiverem abaixo do limite mínimo, os botões são acionados para liberar os nutrientes.
+Indicação Visual: Os LEDs indicam o estado do sistema, como a bomba ligada ou desligada.
 
 Para realizar o CRUD das tabelas de cultura e demais sensores decidimos fazer uma API em Python utlizando um framework chamado FastAPI.
 
