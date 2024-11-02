@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Sequence
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Sequence, Boolean
 from sqlalchemy.orm import relationship
 from db_config import Base
 
@@ -29,6 +29,7 @@ class Sensor(Base):
     valorph = Column(Float, nullable=False)
     valorumidade = Column(Float, nullable=False)
     valortemperatura = Column(Float, nullable=False)
+    irrigadorligado = Column(Boolean, nullable=False)
     datamedicao = Column(DateTime, nullable=False)
     idcultura = Column(Integer, ForeignKey("culturas.idcultura"))
 
