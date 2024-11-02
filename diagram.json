@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -4.9, "left": -206.6, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 182.7,
+      "left": 71.4,
+      "attrs": { "temperature": "36.2", "humidity": "0" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 63.8,
+      "left": 182.4,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 2.4,
+      "left": 182.6,
+      "rotate": 180,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -124.6, "left": -9.6, "attrs": {} },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 204.8,
+      "left": 154.4,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 24,
+      "left": 47.45,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": -42, "left": 51.8, "attrs": { "color": "blue" } }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "dht1:SDA", "esp:D15", "green", [ "v0" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "relay1:VCC", "esp:D22", "green", [ "h-67.2", "v134.4" ] ],
+    [
+      "ldr1:GND",
+      "esp:GND.1",
+      "black",
+      [ "h9.6", "v-96.4", "h-211.2", "v0", "h48", "v9.6", "h-192" ]
+    ],
+    [ "ldr1:VCC", "esp:D4", "green", [ "h-19.2", "v-105.6" ] ],
+    [ "btn2:2.r", "esp:D23", "green", [ "h-288.2", "v-0.2" ] ],
+    [ "btn1:1.l", "esp:D18", "green", [ "h-288" ] ],
+    [ "btn2:2.l", "esp:GND.1", "black", [ "h0", "v124.6", "h-364.8" ] ],
+    [ "btn1:2.r", "esp:GND.1", "black", [ "h0.2", "v48.2", "h0", "v0" ] ],
+    [ "relay1:GND", "esp:GND.1", "black", [ "h-67.2", "v239.6" ] ],
+    [ "led1:A", "r1:2", "green", [ "v-9.6", "h-38.4" ] ],
+    [ "led1:C", "esp:GND.1", "black", [ "v144", "h-172.4" ] ],
+    [ "r1:2", "esp:D21", "green", [ "h-182.4", "v-1.2" ] ]
+  ],
+  "dependencies": {}
+}
