@@ -1,53 +1,63 @@
-#include "DHTesp.h"
+#include "DHTesp.h" // Inclusao da biblioteca
 
-const int pinSensorUmidade = 15;
-const int pinRele = 22;
-const int pinBotaoPotassio = 23;
-const int pinBotaoFosforo = 18;
-const int pinLed = 21; 
+//Definição dos PIN´s
+#define pinUmidade 15
+#define pinBotaoFosforo 18
+#define pinLed 21
+#define pinRele 22
+#define pinBotaoPotassio 23
 
-// Constantes para o cálculo do pH
-const int resistencia_ph4 = 0;  // Adicione o valor correto da resistência para pH 4
-const int resistencia_ph7 = 1023;  // Adicione o valor correto da resistência para pH 7
-const int pin_ph = 34;  // Pino para leitura do pH
 
-DHTesp sensorUmidade;
+int valorFosforo = 0; // Definição de Fosforo se botão não acionado
+int btnStateP;
+int valorPotassio = 0; // Definição de Potássio se botão não acionado
+int btnStateK;
 
-// Gera um número aleatório dentro de um intervalo
+// Define constantes para calibração do sensor de pH
+const int resistencia_ph4 = 0;  
+const int resistencia_ph7 = 1023;  
+const int pin_ph = 34;  
+
+DHTesp sensorUmidade; 
+
+// Gera um número aleatório dentro de um intervalo para K e P
 int gerarNumeroAleatorio(int min, int max) {
   return random(min, max + 1);
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200); //Inicia comunicação serial
   
-  // Inicializa a semente do gerador de números aleatórios uma única vez
+  // Inicializa a geração de números aleatórios uma única vez
   randomSeed(analogRead(0));
   
-  sensorUmidade.setup(pinSensorUmidade, DHTesp::DHT22);
+  sensorUmidade.setup(pinUmidade, DHTesp::DHT22); //Configura o sensor DHT22
+
+  //Define os modos dos pinos (entrada/saída)
   pinMode(pinRele, OUTPUT);
-  pinMode(pinBotaoPotassio, INPUT);  // Corrigido para INPUT se for botão
-  pinMode(pinBotaoFosforo, INPUT);   // Corrigido para INPUT se for botão
+  pinMode(pinBotaoPotassio, INPUT_PULLUP);  
+  pinMode(pinBotaoFosforo, INPUT_PULLUP);   
   pinMode(pinLed, OUTPUT); 
 }
 
 void loop() {
-  // Lê a temperatura e umidade do sensor
+  // Leitura da temperatura e umidade do sensor
   TempAndHumidity dados = sensorUmidade.getTempAndHumidity();
   
-  // Verifica se a leitura foi bem-sucedida
-  if (isnan(dados.temperature) || isnan(dados.humidity)) {
-    Serial.println("Falha ao ler o sensor DHT!");
-    delay(1000);
-    return;
+  //Pressionando o botão azul verifica o valor do Potassio  
+  btnStateK = digitalRead(pinBotaoPotassio);
+  if (btnStateK == LOW){
+    valorPotassio = gerarNumeroAleatorio(1,50); //Gera valores aleatórios para Potássio
   }
-  
-  int valorFosforo = gerarNumeroAleatorio(1, 50);
-  int valorPotassio = gerarNumeroAleatorio(1, 50);
-  
-  // Leitura do pH
-  int valor_ldr = analogRead(pin_ph);
-  float valor_ph = map(valor_ldr, resistencia_ph4, resistencia_ph7, 4, 7);
+
+  //Pressionando o botão verde verifica o valor do Fosforo  
+  btnStateP = digitalRead(pinBotaoFosforo);
+  if (btnStateP == LOW){
+    valorFosforo = gerarNumeroAleatorio(1,50); //Gera valores aleatórios para Fosfóro
+  }
+
+  int valor_ldr = analogRead(pin_ph); // Leitura do valor analógico do sensor de pH
+  float valor_ph = map(valor_ldr, resistencia_ph4, resistencia_ph7, 4, 7); //Mapeia o valor para a escala de pH (4 a 7)
 
   // Impressão dos dados
   Serial.println("Temperatura: " + String(dados.temperature, 2) + "°C");
@@ -66,23 +76,6 @@ void loop() {
     digitalWrite(pinRele, LOW);  // Desliga a bomba
     digitalWrite(pinLed, LOW);    // Desliga o LED
     Serial.println("Bomba desligada: Umidade suficiente");
-  }
-
-  // Verificação dos níveis de nutrientes
-  if (valorPotassio < 38) {
-    digitalWrite(pinBotaoPotassio, HIGH);
-    Serial.println("Ativação de potássio");
-  } else {
-    digitalWrite(pinBotaoPotassio, LOW);
-    Serial.println("Nível de potássio suficiente");
-  }
-
-  if (valorFosforo < 15) {
-    digitalWrite(pinBotaoFosforo, HIGH);
-    Serial.println("Ativação de fósforo");
-  } else {
-    digitalWrite(pinBotaoFosforo, LOW);
-    Serial.println("Nível de fósforo suficiente");
   }
 
   delay(1000);
