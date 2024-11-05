@@ -17,6 +17,8 @@ Este sistema de irrigação automatizado tem como objetivo otimizar a gestão da
 - Liberação de Nutrientes: Se os níveis de potássio (<38) ou fósforo (<15) estiverem abaixo do limite mínimo, os botões são acionados para liberar os nutrientes.
 - Indicação Visual: Os LEDs indicam o estado do sistema, como a bomba ligada ou desligada.
 
+**Wokwi https://wokwi.com/projects/413103691995388929**
+
 Para realizar o CRUD das tabelas de cultura e demais sensores decidimos fazer uma API em Python utlizando um framework chamado FastAPI.
 
 **Por que FastAPI?**
