@@ -1,13 +1,18 @@
 
 <img src="../assets/logo_fiap.jpg" alt="FIAP - Faculdade de Informática e Admnistração Paulista" border="0" width=30% height=30%>
 
-# AI Project Document - Módulo 1 - FIAP
+# Sistema de irrigação automático - Fase 4 - Capítulo 1 - FIAP
 
-**_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final_**
 
 ## Nome do Grupo
 
 #### Nomes dos integrantes do grupo
+
+- Brenner H F Araújo 
+- Bryan Fagundes 
+- Diogo Botton 
+- Hyanka Coelho 
+- Juliana Hungaro Fidelis 
 
 
 
@@ -45,11 +50,11 @@
 
 ## 2.1. Objetivos do Projeto
 
-*Defina claramente os objetivos do projeto de IA. O que o projeto pretende alcançar?*
+*Este projeto tem como objetivo desenvolver uma solução tecnológica que automatiza o processo de irrigação, tornando-o mais eficiente e preciso. Utilizando sensores e um microcontrolador, o sistema monitora continuamente as condições do solo e aciona a bomba d'água de forma autônoma, adaptando-se às necessidades específicas de cada plantação.*
 
 ## 2.2. Público-Alvo
 
-*Identifique o público-alvo do projeto. Quem são os usuários finais da solução desenvolvida?*
+*Agricultores que buscam uma solução tecnológica para automatizar a irrigação e tomar decisões baseada em dados para gerenciar suas plantações.*
 
 ## 2.3. Metodologia
 
