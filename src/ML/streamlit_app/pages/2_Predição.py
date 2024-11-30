@@ -5,7 +5,7 @@ import joblib
 
 @st.cache_data
 def load_model():
-    return joblib.load('../irrigation_automation_model_pipeline.joblib')
+    return joblib.load('irrigation_automation_model_pipeline.joblib')
 
 model = load_model()
 
