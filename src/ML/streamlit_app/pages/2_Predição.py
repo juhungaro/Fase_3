@@ -5,11 +5,11 @@ import os
 import joblib
 
 main_path = os.path.dirname(__file__).removesuffix('pages')
-model = os.path.join(main_path, 'irrigation_automation_model_pipeline.joblib')
+model_path = os.path.join(main_path, 'irrigation_automation_model_pipeline.joblib')
 
 @st.cache_data
 def load_model():
-    return joblib.load(model)
+    return joblib.load(model_path)
 
 model = load_model()
 
