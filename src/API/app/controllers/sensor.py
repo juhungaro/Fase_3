@@ -13,6 +13,7 @@ class SensorRequest(BaseModel):
     valor_ph: float
     valor_umidade: float
     valor_temperatura: float
+    precipitacao: float
     irrigador_ligado: bool
     idcultura: int
 
@@ -30,6 +31,7 @@ def create_sensor(sensor: SensorRequest = Body(...), db: Session = Depends(get_d
         valorumidade = sensor.valor_umidade,
         valortemperatura = sensor.valor_temperatura,
         irrigadorligado = sensor.irrigador_ligado,
+        precipitacao = sensor.precipitacao,
         datamedicao=datetime.now(),
         idcultura=sensor.idcultura)
     
