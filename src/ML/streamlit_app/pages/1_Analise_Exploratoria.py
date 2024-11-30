@@ -3,10 +3,14 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
 import pandas as pd
+import os
+
+main_path = os.path.dirname(__file__).removesuffix('pages')
+data_path = os.path.join(main_path, 'produtos_agricolas.csv')
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv('produtos_agricolas.csv')
+    data = pd.read_csv(data_path)
     return data
 
 df = load_data()
