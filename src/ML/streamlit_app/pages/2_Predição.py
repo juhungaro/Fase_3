@@ -9,7 +9,7 @@ model_path = os.path.join(main_path, 'irrigation_automation_model_pipeline.jobli
 
 @st.cache_data
 def load_model():
-    return joblib.load(model)
+    return joblib.load(model_path)
 
 model = load_model()
 
