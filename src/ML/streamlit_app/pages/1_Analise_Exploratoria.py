@@ -6,7 +6,7 @@ import pandas as pd
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv('../produtos_agricolas.csv')
+    data = pd.read_csv('produtos_agricolas.csv')
     return data
 
 df = load_data()
