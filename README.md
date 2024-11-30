@@ -13,7 +13,7 @@
 ## 👨‍🎓 Integrantes: 
 - <a href="https://www.linkedin.com/in/bryanjfagundes/">Bryan Fagundes</a>
 - <a href="https://br.linkedin.com/in/brenner-fagundes">Brenner Fagundes</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Diogo</a> 
+- <a href="https://www.linkedin.com/in/diogo-botton-46ba49197/">Diogo Botton</a> 
 - <a href="https://www.linkedin.com/in/hyankacoelho/"> Hyanka Coelho</a> 
 - <a href="https://www.linkedin.com/in/julianahungaro/"> Juliana Hungaro Fidelis </a> 
 
