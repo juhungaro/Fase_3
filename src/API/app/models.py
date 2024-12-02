@@ -29,6 +29,7 @@ class Sensor(Base):
     valorph = Column(Float, nullable=False)
     valorumidade = Column(Float, nullable=False)
     valortemperatura = Column(Float, nullable=False)
+    precipitacao = Column(Float, nullable=False)
     irrigadorligado = Column(Boolean, nullable=False)
     datamedicao = Column(DateTime, nullable=False)
     idcultura = Column(Integer, ForeignKey("culturas.idcultura"))
